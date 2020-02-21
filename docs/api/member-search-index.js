@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"edu.cnm.deepdive","c":"Frobenius","l":"Frobenius()","url":"%3Cinit%3E()"},{"p":"edu.cnm.deepdive","c":"Frobenius","l":"isGeneralMcNugget(int, int[])","url":"isGeneralMcNugget(int,int[])"},{"p":"edu.cnm.deepdive","c":"Frobenius","l":"isMcNugget(int)"}]
