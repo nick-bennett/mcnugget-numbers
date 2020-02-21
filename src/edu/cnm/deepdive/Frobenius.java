@@ -1,5 +1,7 @@
 package edu.cnm.deepdive;
 
+import java.util.Arrays;
+
 /**
  * Incorporates a number of {@code static} methods related to the Coin problem and Frobenius
  * numbers. Currently, the implementation focus is on <em>McNugget numbers</em> and variations on
@@ -19,20 +21,15 @@ public class Frobenius {
    * and 20), {@code false} otherwise.
    */
   public static boolean isMcNugget(int value) {
-    /*
-         TODO When the isGeneralMcNugget implementation is complete, modify this method to invoke the
-          general method, e.g.
-
-              return isGeneralMcNugget(value, new int[]{20, 9, 6};
-    */
-    return
-        value >= 0
-        && (
-            value == 0
-            || isMcNugget(value - 20)
-            || isMcNugget(value - 9)
-            || isMcNugget(value - 6)
-        );
+//    return
+//        value >= 0
+//        && (
+//            value == 0
+//            || isMcNugget(value - 20)
+//            || isMcNugget(value - 9)
+//            || isMcNugget(value - 6)
+//        );
+    return isGeneralMcNugget(value, new int[]{20, 9, 6});
   }
 
   /**
@@ -47,7 +44,19 @@ public class Frobenius {
    * {@code false} otherwise.
    */
   public static boolean isGeneralMcNugget(int value, int[] packSizes) {
-    return false; // TODO Complete implementation for extra credit.
+    boolean result = false;
+    if (value == 0) {
+      result = true;
+    } else if (value > 0) {
+      for (int i = 0; i < packSizes.length; i++) {
+        if (isGeneralMcNugget(value - packSizes[i],
+            Arrays.copyOfRange(packSizes, i, packSizes.length))) {
+          result = true;
+          break;
+        }
+      }
+    }
+    return result;
   }
 
 }
