@@ -12,6 +12,8 @@ import java.util.Arrays;
  */
 public class Frobenius {
 
+  private Frobenius() {}
+
   /**
    * Determines if {@code value} can be expressed as the sum of non-negative integral multiples of
    * 6, 9, and 20 (the original McNuggets pack sizes).
@@ -21,29 +23,23 @@ public class Frobenius {
    * and 20), {@code false} otherwise.
    */
   public static boolean isMcNugget(int value) {
-//    return
-//        value >= 0
-//        && (
-//            value == 0
-//            || isMcNugget(value - 20)
-//            || isMcNugget(value - 9)
-//            || isMcNugget(value - 6)
-//        );
     return isGeneralMcNugget(value, new int[]{20, 9, 6});
   }
 
   /**
    * Determines if {@code value} can be expressed as the sum of non-negative integral multiples of
-   * the elements of {@code packSizes}. (If we invoke {@code
-   * isGeneralMcNugget(value, new int[]{20, 9, 6})}, the result returned should be identical to that
-   * returned by {@link #isMcNugget(int) isMcNugget(value)}.
+   * the elements of {@code packSizes}. As the name implies, this method is the generalized version
+   * of {@link #isMcNugget(int)}: If we invoke {@code
+   * isGeneralMcNugget(value, new int[]{20, 9, 6})}, the result returned will be identical to that
+   * returned by {@link #isMcNugget(int) isMcNugget(value)}.)
    *
    * @param value target/goal number.
    * @param packSizes array of distinct, positive {@code int }pack sizes, in descending order.
    * @return {@code true} if {@code value} is a McNugget number using the specific pack sizes,
-   * {@code false} otherwise.
+   *         {@code false} otherwise.
    */
   public static boolean isGeneralMcNugget(int value, int[] packSizes) {
+//    System.out.printf("Testing %d with pack sizes %s...%n", value, Arrays.toString(packSizes));
     boolean result = false;
     if (value == 0) {
       result = true;
@@ -56,6 +52,8 @@ public class Frobenius {
         }
       }
     }
+//    System.out.printf("%d %s a general McNugget number for pack sizes %s.%n",
+//        value, result ? "is" : "is not", Arrays.toString(packSizes));
     return result;
   }
 
