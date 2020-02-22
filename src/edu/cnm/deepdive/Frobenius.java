@@ -1,6 +1,8 @@
 package edu.cnm.deepdive;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Incorporates a number of {@code static} methods related to the Coin problem and Frobenius
@@ -39,21 +41,27 @@ public class Frobenius {
    *         {@code false} otherwise.
    */
   public static boolean isGeneralMcNugget(int value, int[] packSizes) {
-//    System.out.printf("Testing %d with pack sizes %s...%n", value, Arrays.toString(packSizes));
+    return isGeneralMcNugget(value, packSizes, new HashMap<>());
+  }
+
+  private static boolean isGeneralMcNugget(int value, int[] packSizes, Map<Integer, Boolean> map) {
     boolean result = false;
     if (value == 0) {
       result = true;
     } else if (value > 0) {
-      for (int i = 0; i < packSizes.length; i++) {
-        if (isGeneralMcNugget(value - packSizes[i],
-            Arrays.copyOfRange(packSizes, i, packSizes.length))) {
-          result = true;
-          break;
+      if (!map.containsKey(value)) {
+        for (int i = 0; i < packSizes.length; i++) {
+          if (isGeneralMcNugget(value - packSizes[i],
+              Arrays.copyOfRange(packSizes, i, packSizes.length), map)) {
+            result = true;
+            break;
+          }
         }
+        map.put(value, result);
+      } else {
+        result = map.get(value);
       }
     }
-//    System.out.printf("%d %s a general McNugget number for pack sizes %s.%n",
-//        value, result ? "is" : "is not", Arrays.toString(packSizes));
     return result;
   }
 

@@ -1,5 +1,4 @@
 value, pack sizes, is McNugget?
-1, "5, 2", false
 3, "5, 2", false
 4, "5, 2", true
 5, "5, 2", true
